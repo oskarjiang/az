@@ -1,6 +1,6 @@
 # az
 
-TODO:
+## TODO:
 
 - [] Sorting for getByType
 - [] Include evolutions for getById. Recursive (?)
@@ -9,7 +9,9 @@ TODO:
 - [] Endpoint for adding
 - [] Database insertion/setup
 - [] Documentation in README
-  Nice to have:
+
+## Nice to have:
+
 - [] Unit tests
 - [] Param validation (express-validator)
 - [] Docker

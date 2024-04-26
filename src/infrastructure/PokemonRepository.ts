@@ -1,16 +1,19 @@
 import { queryMongo } from "./MongodbClient";
-import { PokemonDto } from "./Dto/PokemonDto";
+import { PokemonDocument } from "./Document/PokemonDocument";
 
 const uri = "mongodb://localhost:27017";
 const dbName = "az";
 const collectionName = "pokemons";
 
-export const getAll = async (): Promise<PokemonDto[]> => {
+export const getAll = async (): Promise<PokemonDocument[]> => {
   const result = await queryMongo(uri, dbName, collectionName);
-  return result?.pokemon ?? [];
+  return result ?? [];
 };
 
-export const getByName = async (name: string): Promise<PokemonDto[]> => {
-  const allPokemons = await getAll();
-  return allPokemons.filter((pokemon) => pokemon.name === name);
+export const getByName = async (name: string): Promise<PokemonDocument[]> => {
+  return (
+    (await queryMongo(uri, dbName, collectionName, {
+      name,
+    })) ?? []
+  );
 };

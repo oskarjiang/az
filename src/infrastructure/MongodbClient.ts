@@ -15,7 +15,7 @@ export const queryMongo = async (
     const db = client.db(dbName);
     const collection = db.collection<PokemonDocument>(collectionName);
 
-    const queryResult = await collection.find(filter).next();
+    const queryResult = await collection.find(filter).toArray();
 
     return queryResult;
   } catch (error) {

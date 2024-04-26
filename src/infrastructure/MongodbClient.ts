@@ -1,5 +1,5 @@
 import { Filter, MongoClient } from "mongodb";
-import { PokemonDocument } from "./Document/PokemonDocument";
+import { PokemonDocument } from "./Documents/PokemonDocument";
 
 export const queryMongo = async (
   uri: string,

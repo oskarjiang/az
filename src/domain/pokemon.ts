@@ -1,4 +1,4 @@
-import { Element } from "./types";
+import { Element } from "./Types";
 
 export type Pokemon = {
   id: number;

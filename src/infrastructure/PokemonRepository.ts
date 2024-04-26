@@ -26,3 +26,13 @@ export const getByType = async (type: Element) => {
     type,
   });
 };
+
+export const getByTypeWithoutWeaknesses = async (
+  type: Element,
+  weaknesses: Element[]
+) => {
+  return await queryMongo(uri, dbName, collectionName, {
+    type,
+    weaknesses: { $nin: weaknesses },
+  });
+};

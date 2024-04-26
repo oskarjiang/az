@@ -4,8 +4,9 @@ import {
   getPokemonById,
   getPokemonByName,
   getPokemonsByType,
+  getSuggestedPokemonById,
 } from "../application/PokemonService";
-import { Element, isElement } from "../domain/Types";
+import { isElement } from "../domain/Types";
 const app = express();
 const port = 3000;
 
@@ -29,12 +30,12 @@ app.get("/getByName/:name", async (req, res) => {
   res.send(await getPokemonByName(req.params.name));
 });
 
-app.get("/getSuggested/:id", (req, res) => {
-  // Return an item which given item is strong against
+app.get("/getSuggested/:id", async (req, res) => {
+  res.send(await getSuggestedPokemonById(parseInt(req.params.id)));
 });
 
-app.post("/getSuggested/:id", (req, res) => {
-  // Return an item which given item is strong against
+app.post("/addPokemon/", (req, res) => {
+  // Add pokemon
 });
 
 app.listen(port, () => {

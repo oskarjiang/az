@@ -1,5 +1,5 @@
 import express from "express";
-import { getAll } from "../infrastructure/PokemonAdapter";
+import { getAll } from "../infrastructure/PokemonRepository";
 const app = express();
 const port = 3000;
 

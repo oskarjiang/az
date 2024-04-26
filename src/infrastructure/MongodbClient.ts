@@ -1,4 +1,5 @@
 import { MongoClient } from "mongodb";
+import { PokemonDocument } from "./Document/PokemonDocument";
 
 export const queryMongo = async (
   uri: string,
@@ -11,12 +12,11 @@ export const queryMongo = async (
     await client.connect();
 
     const db = client.db(dbName);
-    const collection = db.collection(collectionName);
+    const collection = db.collection<PokemonDocument>(collectionName);
 
-    const queryResult = await collection.find({}).toArray();
+    const queryResult = await collection.findOne({});
 
-    console.log("Query Result:");
-    console.log(queryResult);
+    return queryResult
   } catch (error) {
     console.error("Error:", error);
   } finally {

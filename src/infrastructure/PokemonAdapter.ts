@@ -1,9 +1,12 @@
 import { queryMongo } from "./MongodbClient";
+import { PokemonDto } from "./Dto/PokemonDto";
 
 const uri = "mongodb://localhost:27017";
 const dbName = "az";
 const collectionName = "pokemons";
 
-export const getAll = async () => {
-  return await queryMongo(uri, dbName, collectionName);
+export const getAll = async (): Promise<PokemonDto[]> => {
+  const result =  await queryMongo(uri, dbName, collectionName);
+  console.log(result?.pokemon[0])
+  return []
 };

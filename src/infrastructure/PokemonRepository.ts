@@ -6,7 +6,6 @@ const dbName = "az";
 const collectionName = "pokemons";
 
 export const getAll = async (): Promise<PokemonDto[]> => {
-  const result =  await queryMongo(uri, dbName, collectionName);
-  console.log(result?.pokemon[0])
-  return []
+  const result = await queryMongo(uri, dbName, collectionName);
+  return result?.pokemon ?? [];
 };

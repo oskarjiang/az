@@ -1,11 +1,10 @@
 import express from "express";
-import { getAll } from "../infrastructure/PokemonRepository";
+import { getAllPokemons } from "../application/PokemonService";
 const app = express();
 const port = 3000;
 
-app.get("/", async (req, res) => {
-  await getAll();
-  res.send("Hello World!");
+app.get("/", async (_req, res) => {
+  res.send(await getAllPokemons());
 });
 
 app.get("/getById/:id", (req, res) => {

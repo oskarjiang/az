@@ -16,7 +16,7 @@ export const queryMongo = async (
 
     const queryResult = await collection.findOne({});
 
-    return queryResult
+    return queryResult;
   } catch (error) {
     console.error("Error:", error);
   } finally {

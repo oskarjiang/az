@@ -1,5 +1,5 @@
 import express from "express";
-import { getAllPokemons } from "../application/PokemonService";
+import { getAllPokemons, getPokemonById } from "../application/PokemonService";
 import { getByName } from "../infrastructure/PokemonRepository";
 const app = express();
 const port = 3000;
@@ -8,8 +8,8 @@ app.get("/", async (_req, res) => {
   res.send(await getAllPokemons());
 });
 
-app.get("/getById/:id", (req, res) => {
-  // Return item and all evolutions
+app.get("/getById/:id", async (req, res) => {
+  res.send(await getPokemonById(parseInt(req.params.id)));
 });
 
 app.get("/getByType/:type/:sortingCriteria", (req, res) => {

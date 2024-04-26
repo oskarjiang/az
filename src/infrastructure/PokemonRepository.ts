@@ -9,3 +9,8 @@ export const getAll = async (): Promise<PokemonDto[]> => {
   const result = await queryMongo(uri, dbName, collectionName);
   return result?.pokemon ?? [];
 };
+
+export const getByName = async (name: string): Promise<PokemonDto[]> => {
+  const allPokemons = await getAll();
+  return allPokemons.filter((pokemon) => pokemon.name === name);
+};

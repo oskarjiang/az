@@ -1,5 +1,6 @@
 import express from "express";
 import { getAllPokemons } from "../application/PokemonService";
+import { getByName } from "../infrastructure/PokemonRepository";
 const app = express();
 const port = 3000;
 
@@ -15,8 +16,8 @@ app.get("/getByType/:type/:sortingCriteria", (req, res) => {
   // Return all items of specified type
 });
 
-app.get("/getByName/:name", (req, res) => {
-  // Return all items with name
+app.get("/getByName/:name", async (req, res) => {
+  res.send(await getByName(req.params.name));
 });
 
 app.get("/getSuggested/:id", (req, res) => {

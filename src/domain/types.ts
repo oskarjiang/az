@@ -1,0 +1,17 @@
+export type Element =
+  | "Grass"
+  | "Poison"
+  | "Water"
+  | "Bug"
+  | "Flying"
+  | "Normal"
+  | "Electric"
+  | "Ground"
+  | "Psychic"
+  | "Fairy"
+  | "Fighting"
+  | "Rock"
+  | "Ice"
+  | "Ghost"
+  | "Dragon"
+  | "Dark";

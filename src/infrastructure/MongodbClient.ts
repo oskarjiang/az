@@ -20,6 +20,7 @@ export const queryMongo = async (
     return queryResult;
   } catch (error) {
     console.error("Error:", error);
+    return [];
   } finally {
     await client.close();
   }

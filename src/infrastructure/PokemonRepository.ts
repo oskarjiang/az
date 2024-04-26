@@ -6,14 +6,11 @@ const dbName = "az";
 const collectionName = "pokemons";
 
 export const getAll = async (): Promise<PokemonDocument[]> => {
-  const result = await queryMongo(uri, dbName, collectionName);
-  return result ?? [];
+  return await queryMongo(uri, dbName, collectionName);
 };
 
 export const getByName = async (name: string): Promise<PokemonDocument[]> => {
-  return (
-    (await queryMongo(uri, dbName, collectionName, {
-      name,
-    })) ?? []
-  );
+  return await queryMongo(uri, dbName, collectionName, {
+    name,
+  });
 };

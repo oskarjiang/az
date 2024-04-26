@@ -1,3 +1,4 @@
+import { Element } from "../domain/Types";
 import { queryMongo } from "./MongodbClient";
 
 const uri = "mongodb://localhost:27017";
@@ -17,5 +18,11 @@ export const getById = async (id: number) => {
 export const getByName = async (name: string) => {
   return await queryMongo(uri, dbName, collectionName, {
     name,
+  });
+};
+
+export const getByType = async (type: Element) => {
+  return await queryMongo(uri, dbName, collectionName, {
+    type,
   });
 };

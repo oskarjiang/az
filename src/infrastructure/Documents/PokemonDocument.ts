@@ -14,5 +14,6 @@ export type PokemonDocument = {
   spawn_time: string;
   multipliers: number[] | null;
   weaknesses: string[];
-  next_evolution: { num: string; name: string }[];
+  prev_evolution?: { num: string; name: string }[];
+  next_evolution?: { num: string; name: string }[];
 };

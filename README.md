@@ -9,6 +9,7 @@
 - [] Endpoint for adding
 - [] Database insertion/setup
 - [] Documentation in README
+- [] Domain types (?)
 
 ## Nice to have:
 

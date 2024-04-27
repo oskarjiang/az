@@ -48,8 +48,9 @@ export const getByTypeWithoutWeaknesses = async (
   });
 };
 
-export const add = async (pokemon: PokemonDocument) =>
-  await insert(uri, dbName, collectionName, pokemon);
+export const add = async (pokemon: PokemonDocument) => {
+  return await insert(uri, dbName, collectionName, pokemon);
+};
 
 export const addPrevEvolution = async (
   pokemonId: number,

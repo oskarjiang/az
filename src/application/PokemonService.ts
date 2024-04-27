@@ -56,8 +56,6 @@ export const getSuggestedPokemonById = async (id: number) => {
 };
 
 export const addPokemon = async (newPokemon: PokemonDocument) => {
-  await add(newPokemon);
-
   if (newPokemon.prev_evolution) {
     for (let index = 0; index < newPokemon.prev_evolution.length; index++) {
       const prevEvolutionNum = newPokemon.prev_evolution[index].num;
@@ -79,4 +77,5 @@ export const addPokemon = async (newPokemon: PokemonDocument) => {
       });
     }
   }
+  return await add(newPokemon);
 };

@@ -48,7 +48,7 @@ app.get("/getSuggested/:id", async (req, res) => {
 app.post("/addPokemon", async (req, res) => {
   try {
     await addPokemon(req.body);
-    res.status(200);
+    res.status(200).send("Success");
   } catch (error) {
     console.log("🚀 ~ app.post ~ error:", error);
     res.status(400).send(error);

@@ -13,7 +13,7 @@ export const getAllPokemons = async () => {
 };
 
 export const getPokemonById = async (id: number) => {
-  return (await getById(id))[0];
+  return await getById(id);
 };
 
 export const getPokemonByName = async (name: string) => {

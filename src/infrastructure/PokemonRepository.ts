@@ -10,8 +10,16 @@ export const getAll = async () => {
 };
 
 export const getById = async (id: number) => {
+  return (
+    await queryMongo(uri, dbName, collectionName, {
+      id,
+    })
+  )[0];
+};
+
+export const getByNum = async (num: string) => {
   return await queryMongo(uri, dbName, collectionName, {
-    id,
+    num,
   });
 };
 

@@ -7,7 +7,11 @@ import {
   getByType,
   getByTypeWithoutWeaknesses,
 } from "../infrastructure/PokemonRepository";
-import { pickRandomItemInArray } from "./Helpers";
+import {
+  getNextEvolutions,
+  getPrevEvolutions,
+  pickRandomItemInArray,
+} from "./Helpers";
 
 export const getAllPokemons = async () => {
   return await getAll();
@@ -19,33 +23,9 @@ export const getPokemonById = async (id: number) => {
   const pokemonWithGivenId = await getById(id);
   pokemons.push(pokemonWithGivenId);
 
-  if (pokemonWithGivenId.prev_evolution) {
-    for (
-      let index = 0;
-      index < pokemonWithGivenId.prev_evolution.length;
-      index++
-    ) {
-      const previousEvolution = await getByNum(
-        pokemonWithGivenId.prev_evolution[index].num
-      );
-      pokemons.push(previousEvolution);
-    }
-  }
-
-  if (pokemonWithGivenId.next_evolution) {
-    for (
-      let index = 0;
-      index < pokemonWithGivenId.next_evolution.length;
-      index++
-    ) {
-      const previousEvolution = await getByNum(
-        pokemonWithGivenId.next_evolution[index].num
-      );
-      pokemons.push(previousEvolution);
-    }
-  }
-
-  return pokemons;
+  return pokemons
+    .concat(await getPrevEvolutions(pokemonWithGivenId))
+    .concat(await getNextEvolutions(pokemonWithGivenId));
 };
 
 export const getPokemonByName = async (name: string) => {

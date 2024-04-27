@@ -51,7 +51,7 @@ export const getPokemonById = async (id: number) => {
 export const getPokemonByName = async (name: string) => {
   const allPokemons = await getAll();
   const fuse = new Fuse(allPokemons, { keys: ["name"] });
-  return fuse.search(name);
+  return fuse.search(name).map((r) => r.item);
 };
 
 export const getPokemonsByType = async (type: string, sortOn: string) => {

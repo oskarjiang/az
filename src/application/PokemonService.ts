@@ -3,6 +3,7 @@ import {
   getAll,
   getById,
   getByName,
+  getByNum,
   getByType,
   getByTypeWithoutWeaknesses,
 } from "../infrastructure/PokemonRepository";
@@ -13,7 +14,38 @@ export const getAllPokemons = async () => {
 };
 
 export const getPokemonById = async (id: number) => {
-  return await getById(id);
+  const pokemons = [];
+
+  const pokemonWithGivenId = await getById(id);
+  pokemons.push(pokemonWithGivenId);
+
+  if (pokemonWithGivenId.prev_evolution) {
+    for (
+      let index = 0;
+      index < pokemonWithGivenId.prev_evolution.length;
+      index++
+    ) {
+      const previousEvolution = await getByNum(
+        pokemonWithGivenId.prev_evolution[index].num
+      );
+      pokemons.push(previousEvolution);
+    }
+  }
+
+  if (pokemonWithGivenId.next_evolution) {
+    for (
+      let index = 0;
+      index < pokemonWithGivenId.next_evolution.length;
+      index++
+    ) {
+      const previousEvolution = await getByNum(
+        pokemonWithGivenId.next_evolution[index].num
+      );
+      pokemons.push(previousEvolution);
+    }
+  }
+
+  return pokemons;
 };
 
 export const getPokemonByName = async (name: string) => {
@@ -28,7 +60,7 @@ export const getPokemonsByType = async (type: string, sortOn: string) => {
 };
 
 export const getSuggestedPokemonById = async (id: number) => {
-  const providedPokemon = await getPokemonById(id);
+  const providedPokemon = await getById(id);
 
   const suggestedPokemon = await getByTypeWithoutWeaknesses(
     pickRandomItemInArray(providedPokemon.weaknesses) as Element,

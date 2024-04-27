@@ -16,8 +16,8 @@
 - Load the JSON dataset into a database of your choice.
   - [x] The database should be used by all endpoints.
 - Create an API endpoint that gets a pokémon by its ID.
-  - [] It should return next and previous evolutions as well.
-  - [] If its next or previous evolutions have further evolutions, those should be included as well.
+  - [x] It should return next and previous evolutions as well.
+  - [x] If its next or previous evolutions have further evolutions, those should be included as well.
 - Create an API endpoint that filters Pokémon by type.
   - [x] The endpoint should accept a type as a parameter and return all Pokémon of that type.
   - [x] It should accept sorting as a parameter. Should be able to sort on most properties (for example weight).

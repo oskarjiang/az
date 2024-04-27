@@ -18,9 +18,11 @@ export const getById = async (id: number) => {
 };
 
 export const getByNum = async (num: string) => {
-  return await queryMongo(uri, dbName, collectionName, {
-    num,
-  });
+  return (
+    await queryMongo(uri, dbName, collectionName, {
+      num,
+    })
+  )[0];
 };
 
 export const getByName = async (name: string) => {

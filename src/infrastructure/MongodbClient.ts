@@ -1,4 +1,4 @@
-import { Filter, MongoClient, Sort } from "mongodb";
+import { Filter, MongoClient } from "mongodb";
 import { PokemonDocument } from "./Documents/PokemonDocument";
 import { getSort } from "./Helper";
 

@@ -1,6 +1,11 @@
 import { Element } from "../domain/Types";
 import { PokemonDocument } from "./Documents/PokemonDocument";
-import { insert, query } from "./MongodbClient";
+import {
+  insert,
+  query,
+  updateNextEvolution,
+  updatePrevEvolution,
+} from "./MongodbClient";
 
 const uri = "mongodb://localhost:27017";
 const dbName = "az";
@@ -56,12 +61,24 @@ export const addPrevEvolution = async (
   pokemonId: number,
   newPrevEvolution: { num: string; name: string }
 ) => {
-  await addPrevEvolution(pokemonId, newPrevEvolution);
+  await updatePrevEvolution(
+    uri,
+    dbName,
+    collectionName,
+    pokemonId,
+    newPrevEvolution
+  );
 };
 
 export const addNextEvolution = async (
   pokemonId: number,
   newNextEvolution: { num: string; name: string }
 ) => {
-  await addNextEvolution(pokemonId, newNextEvolution);
+  await updateNextEvolution(
+    uri,
+    dbName,
+    collectionName,
+    pokemonId,
+    newNextEvolution
+  );
 };

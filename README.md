@@ -26,7 +26,7 @@
         pokémon.
 - Create an API endpoint to add a pokémon to the database.
   - [x] It should accept a pokémon as a parameter.
-  - [] It should be possible to add a pokémon as the next or previous evolution of a already existing pokémon in the database.
+  - [x] It should be possible to add a pokémon as the next or previous evolution of a already existing pokémon in the database.
 
 ## Nice to have:
 

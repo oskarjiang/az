@@ -60,3 +60,63 @@ export const insert = async (
     await client.close();
   }
 };
+
+export const updatePrevEvolution = async (
+  uri: string,
+  dbName: string,
+  collectionName: string,
+  pokemonId: number,
+  newPrevEvolution: { num: string; name: string }
+) => {
+  const client = new MongoClient(uri);
+
+  try {
+    await client.connect();
+
+    const db = client.db(dbName);
+    const collection = db.collection<PokemonDocument>(collectionName);
+
+    const filter = { id: pokemonId };
+    const update = { $push: { prev_evolution: newPrevEvolution } };
+
+    const result = await collection.updateOne(filter, update);
+
+    return result;
+  } catch (error) {
+    throw new Error(
+      `Error when updating ${pokemonId} with ${newPrevEvolution}`
+    );
+  } finally {
+    await client.close();
+  }
+};
+
+export const updateNextEvolution = async (
+  uri: string,
+  dbName: string,
+  collectionName: string,
+  pokemonId: number,
+  newNextEvolution: { num: string; name: string }
+) => {
+  const client = new MongoClient(uri);
+
+  try {
+    await client.connect();
+
+    const db = client.db(dbName);
+    const collection = db.collection<PokemonDocument>(collectionName);
+
+    const filter = { id: pokemonId };
+    const update = { $push: { next_evolution: newNextEvolution } };
+
+    const result = await collection.updateOne(filter, update);
+
+    return result;
+  } catch (error) {
+    throw new Error(
+      `Error when updating ${pokemonId} with ${newNextEvolution}`
+    );
+  } finally {
+    await client.close();
+  }
+};

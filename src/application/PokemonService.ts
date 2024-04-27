@@ -1,6 +1,9 @@
 import Fuse from "fuse.js";
 import { Element, isElement } from "../domain/Types";
 import {
+  add,
+  addNextEvolution,
+  addPrevEvolution,
   getAll,
   getById,
   getByNum,
@@ -12,6 +15,7 @@ import {
   getPrevEvolutions,
   pickRandomItemInArray,
 } from "./Helpers";
+import { PokemonDocument } from "../infrastructure/Documents/PokemonDocument";
 
 export const getAllPokemons = async () => {
   return await getAll();
@@ -49,4 +53,30 @@ export const getSuggestedPokemonById = async (id: number) => {
     providedPokemon.type as Element[]
   );
   return pickRandomItemInArray(suggestedPokemon);
+};
+
+export const addPokemon = async (newPokemon: PokemonDocument) => {
+  await add(newPokemon);
+
+  if (newPokemon.prev_evolution) {
+    for (let index = 0; index < newPokemon.prev_evolution.length; index++) {
+      const prevEvolutionNum = newPokemon.prev_evolution[index].num;
+      const prevEvolution = await getByNum(prevEvolutionNum);
+      await addNextEvolution(prevEvolution.id, {
+        num: newPokemon.num,
+        name: newPokemon.name,
+      });
+    }
+  }
+
+  if (newPokemon.next_evolution) {
+    for (let index = 0; index < newPokemon.next_evolution.length; index++) {
+      const nextEvolutionNum = newPokemon.next_evolution[index].num;
+      const nextEvolution = await getByNum(nextEvolutionNum);
+      await addPrevEvolution(nextEvolution.id, {
+        num: newPokemon.num,
+        name: newPokemon.name,
+      });
+    }
+  }
 };

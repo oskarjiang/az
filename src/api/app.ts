@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  addPokemon,
   getPokemonById,
   getPokemonByName,
   getPokemonsByType,
@@ -7,7 +8,6 @@ import {
 } from "../application/PokemonService";
 import { check, validationResult } from "express-validator";
 import { isElement } from "../domain/Types";
-import { add } from "../infrastructure/PokemonRepository";
 const app = express();
 app.use(express.json());
 const port = 3000;
@@ -47,7 +47,7 @@ app.get("/getSuggested/:id", async (req, res) => {
 
 app.post("/addPokemon", async (req, res) => {
   try {
-    await add(req.body);
+    await addPokemon(req.body);
     res.status(200);
   } catch (error) {
     console.log("🚀 ~ app.post ~ error:", error);

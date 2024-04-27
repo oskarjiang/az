@@ -1,8 +1,8 @@
+import Fuse from "fuse.js";
 import { Element, isElement } from "../domain/Types";
 import {
   getAll,
   getById,
-  getByName,
   getByNum,
   getByType,
   getByTypeWithoutWeaknesses,
@@ -49,7 +49,9 @@ export const getPokemonById = async (id: number) => {
 };
 
 export const getPokemonByName = async (name: string) => {
-  return await getByName(name);
+  const allPokemons = await getAll();
+  const fuse = new Fuse(allPokemons, { keys: ["name"] });
+  return fuse.search(name);
 };
 
 export const getPokemonsByType = async (type: string, sortOn: string) => {

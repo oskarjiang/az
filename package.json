@@ -20,6 +20,7 @@
   "dependencies": {
     "express": "^4.19.2",
     "express-validator": "^7.0.1",
+    "fuse.js": "^7.0.0",
     "mongodb": "^6.5.0"
   }
 }

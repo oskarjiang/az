@@ -13,7 +13,7 @@
 - Create an API endpoint that searches for a pokémon by name.
   - [x] The endpoint should accept a string parameter with a minimum length of three.
   - [x] The parameter should expect the name of a pokémon.
-  - [] Matching the name should be fuzzy.
+  - [x] Matching the name should be fuzzy.
 - Create an API endpoint that returns a suggested pokémon.
   - [x] It should accept a pokémon as a parameter.
   - [x] It should return a pokémon that has a type that the provided pokémon is weak against. The returned pokémon should not be weak vs. the provided
@@ -34,3 +34,8 @@
 - [] Database insertion/setup
 - [] Documentation in README
 - [] Domain types (?)
+
+# Documentation
+
+- I chose to do Fuzzy search using external library since this isn't supported in the free version in MongoDB
+- Architecture is Clean Architecture but with a functional approach

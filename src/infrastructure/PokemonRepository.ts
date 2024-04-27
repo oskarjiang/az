@@ -25,12 +25,6 @@ export const getByNum = async (num: string) => {
   )[0];
 };
 
-export const getByName = async (name: string) => {
-  return await queryMongo(uri, dbName, collectionName, {
-    name,
-  });
-};
-
 export const getByType = async (type: Element, sortOn?: string) => {
   return await queryMongo(
     uri,

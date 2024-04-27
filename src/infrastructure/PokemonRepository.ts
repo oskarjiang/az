@@ -21,10 +21,16 @@ export const getByName = async (name: string) => {
   });
 };
 
-export const getByType = async (type: Element) => {
-  return await queryMongo(uri, dbName, collectionName, {
-    type,
-  });
+export const getByType = async (type: Element, sortOn?: string) => {
+  return await queryMongo(
+    uri,
+    dbName,
+    collectionName,
+    {
+      type,
+    },
+    sortOn
+  );
 };
 
 export const getByTypeWithoutWeaknesses = async (

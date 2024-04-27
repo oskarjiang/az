@@ -1,4 +1,4 @@
-import { Element } from "../domain/Types";
+import { Element, isElement } from "../domain/Types";
 import {
   getAll,
   getById,
@@ -20,8 +20,11 @@ export const getPokemonByName = async (name: string) => {
   return await getByName(name);
 };
 
-export const getPokemonsByType = async (type: Element) => {
-  return await getByType(type);
+export const getPokemonsByType = async (type: string, sortOn: string) => {
+  if (!isElement(type)) {
+    throw new Error(`${type} is not an Element`);
+  }
+  return await getByType(type, sortOn);
 };
 
 export const getSuggestedPokemonById = async (id: number) => {

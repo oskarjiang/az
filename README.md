@@ -2,7 +2,7 @@
 
 ## TODO:
 
-- [] Sorting for getByType
+- [x] Sorting for getByType
 - [] Include evolutions for getById. Recursive (?)
 - [] Min. three characters for getByName
 - [] Fuzzy matching for getByName

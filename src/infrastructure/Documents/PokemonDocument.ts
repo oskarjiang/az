@@ -2,7 +2,7 @@ export type PokemonDocument = {
   id: number;
   num: string;
   name: string;
-  img: string; // URL
+  img: string;
   type: string[];
   height: string;
   weight: string;

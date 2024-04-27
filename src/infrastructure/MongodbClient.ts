@@ -2,7 +2,7 @@ import { Filter, MongoClient } from "mongodb";
 import { PokemonDocument } from "./Documents/PokemonDocument";
 import { getSort } from "./Helper";
 
-export const queryMongo = async (
+export const query = async (
   uri: string,
   dbName: string,
   collectionName: string,
@@ -23,9 +23,32 @@ export const queryMongo = async (
       .toArray();
 
     return queryResult;
-  } catch (error) {
-    console.error("Error:", error);
+  } catch {
     return [];
+  } finally {
+    await client.close();
+  }
+};
+
+export const insert = async (
+  uri: string,
+  dbName: string,
+  collectionName: string,
+  pokemon: PokemonDocument
+) => {
+  const client = new MongoClient(uri);
+
+  try {
+    await client.connect();
+
+    const db = client.db(dbName);
+    const collection = db.collection<PokemonDocument>(collectionName);
+
+    const result = await collection.insertOne(pokemon);
+
+    return result;
+  } catch (error) {
+    throw new Error("Error when adding to database");
   } finally {
     await client.close();
   }

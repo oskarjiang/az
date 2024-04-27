@@ -1,17 +1,18 @@
 import { Element } from "../domain/Types";
-import { queryMongo } from "./MongodbClient";
+import { PokemonDocument } from "./Documents/PokemonDocument";
+import { insert, query } from "./MongodbClient";
 
 const uri = "mongodb://localhost:27017";
 const dbName = "az";
 const collectionName = "pokemons";
 
 export const getAll = async () => {
-  return await queryMongo(uri, dbName, collectionName);
+  return await query(uri, dbName, collectionName);
 };
 
 export const getById = async (id: number) => {
   return (
-    await queryMongo(uri, dbName, collectionName, {
+    await query(uri, dbName, collectionName, {
       id,
     })
   )[0];
@@ -19,14 +20,14 @@ export const getById = async (id: number) => {
 
 export const getByNum = async (num: string) => {
   return (
-    await queryMongo(uri, dbName, collectionName, {
+    await query(uri, dbName, collectionName, {
       num,
     })
   )[0];
 };
 
 export const getByType = async (type: Element, sortOn?: string) => {
-  return await queryMongo(
+  return await query(
     uri,
     dbName,
     collectionName,
@@ -41,8 +42,11 @@ export const getByTypeWithoutWeaknesses = async (
   type: Element,
   weaknesses: Element[]
 ) => {
-  return await queryMongo(uri, dbName, collectionName, {
+  return await query(uri, dbName, collectionName, {
     type,
     weaknesses: { $nin: weaknesses },
   });
 };
+
+export const add = async (pokemon: PokemonDocument) =>
+  await insert(uri, dbName, collectionName, pokemon);

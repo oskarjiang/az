@@ -19,7 +19,7 @@
   - [x] It should return a pokémon that has a type that the provided pokémon is weak against. The returned pokémon should not be weak vs. the provided
         pokémon.
 - Create an API endpoint to add a pokémon to the database.
-  - [] It should accept a pokémon as a parameter.
+  - [x] It should accept a pokémon as a parameter.
   - [] It should be possible to add a pokémon as the next or previous evolution of a already existing pokémon in the database.
 
 ## Nice to have:

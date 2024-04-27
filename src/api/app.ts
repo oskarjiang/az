@@ -7,6 +7,7 @@ import {
 } from "../application/PokemonService";
 import { check, validationResult } from "express-validator";
 import { isElement } from "../domain/Types";
+import { add } from "../infrastructure/PokemonRepository";
 const app = express();
 const port = 3000;
 
@@ -43,8 +44,13 @@ app.get("/getSuggested/:id", async (req, res) => {
   res.send(await getSuggestedPokemonById(parseInt(req.params.id)));
 });
 
-app.post("/addPokemon/", (req, res) => {
-  // Add pokemon
+app.post("/addPokemon/", async (req, res) => {
+  try {
+    await add(req.body);
+    res.status(200);
+  } catch (error) {
+    res.status(400).send(error);
+  }
 });
 
 app.listen(port, () => {

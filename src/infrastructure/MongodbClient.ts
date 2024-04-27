@@ -44,11 +44,18 @@ export const insert = async (
     const db = client.db(dbName);
     const collection = db.collection<PokemonDocument>(collectionName);
 
+    // Check if a Pokemon with the same ID already exists
+    const existingPokemon = await collection.findOne({ id: pokemon.id });
+
+    if (existingPokemon) {
+      throw new Error(`Pokemon with ID ${pokemon.id} already exists`);
+    }
+
     const result = await collection.insertOne(pokemon);
 
     return result;
   } catch (error) {
-    throw new Error("Error when adding to database");
+    throw new Error(`Error when adding to database ${error}`);
   } finally {
     await client.close();
   }

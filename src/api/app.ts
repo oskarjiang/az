@@ -9,6 +9,7 @@ import { check, validationResult } from "express-validator";
 import { isElement } from "../domain/Types";
 import { add } from "../infrastructure/PokemonRepository";
 const app = express();
+app.use(express.json());
 const port = 3000;
 
 app.get("/getById/:id", check("id").isNumeric(), async (req, res) => {
@@ -44,11 +45,12 @@ app.get("/getSuggested/:id", async (req, res) => {
   res.send(await getSuggestedPokemonById(parseInt(req.params.id)));
 });
 
-app.post("/addPokemon/", async (req, res) => {
+app.post("/addPokemon", async (req, res) => {
   try {
     await add(req.body);
     res.status(200);
   } catch (error) {
+    console.log("🚀 ~ app.post ~ error:", error);
     res.status(400).send(error);
   }
 });

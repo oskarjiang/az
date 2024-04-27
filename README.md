@@ -1,5 +1,11 @@
 # az
 
+# Documentation
+
+- I chose to do Fuzzy search using external library since this isn't supported in the free version in MongoDB
+- Architecture is Clean Architecture but with a functional approach
+- With more time perhaps domain types would be preferable rather than using the Document type all over the palce
+
 ## Requirements
 
 - Load the JSON dataset into a database of your choice.
@@ -28,14 +34,3 @@
 - [] Unit tests
 - [] Dockerize application
 - [] Client to consume the API (React, swagger, etc)
-
-## Maybes:
-
-- [] Database insertion/setup
-- [] Documentation in README
-- [] Domain types (?)
-
-# Documentation
-
-- I chose to do Fuzzy search using external library since this isn't supported in the free version in MongoDB
-- Architecture is Clean Architecture but with a functional approach

@@ -11,7 +11,7 @@
   - [x] The endpoint should accept a type as a parameter and return all Pokémon of that type.
   - [x] It should accept sorting as a parameter. Should be able to sort on most properties (for example weight).
 - Create an API endpoint that searches for a pokémon by name.
-  - [] The endpoint should accept a string parameter with a minimum length of three.
+  - [x] The endpoint should accept a string parameter with a minimum length of three.
   - [x] The parameter should expect the name of a pokémon.
   - [] Matching the name should be fuzzy.
 - Create an API endpoint that returns a suggested pokémon.
@@ -24,10 +24,10 @@
 
 ## Nice to have:
 
+- [x] Validate parameters to API endpoints
 - [] Unit tests
-- [] Param validation (express-validator)
-- [] Docker
-- [] React app/Swagger
+- [] Dockerize application
+- [] Client to consume the API (React, swagger, etc)
 
 ## Maybes:
 

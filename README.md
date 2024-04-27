@@ -1,16 +1,5 @@
 # az
 
-## TODO:
-
-- [x] Sorting for getByType
-- [] Include evolutions for getById. Recursive (?)
-- [] Min. three characters for getByName
-- [] Fuzzy matching for getByName
-- [] Endpoint for adding
-- [] Database insertion/setup
-- [] Documentation in README
-- [] Domain types (?)
-
 ## Requirements
 
 - Load the JSON dataset into a database of your choice.
@@ -39,3 +28,9 @@
 - [] Param validation (express-validator)
 - [] Docker
 - [] React app/Swagger
+
+## Maybes:
+
+- [] Database insertion/setup
+- [] Documentation in README
+- [] Domain types (?)

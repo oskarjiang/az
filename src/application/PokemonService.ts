@@ -56,26 +56,30 @@ export const getSuggestedPokemonById = async (id: number) => {
 };
 
 export const addPokemon = async (newPokemon: PokemonDocument) => {
-  if (newPokemon.prev_evolution) {
-    for (let index = 0; index < newPokemon.prev_evolution.length; index++) {
-      const prevEvolutionNum = newPokemon.prev_evolution[index].num;
-      const prevEvolution = await getByNum(prevEvolutionNum);
-      await addNextEvolution(prevEvolution.id, {
-        num: newPokemon.num,
-        name: newPokemon.name,
-      });
+  try {
+    if (newPokemon.prev_evolution) {
+      for (let index = 0; index < newPokemon.prev_evolution.length; index++) {
+        const prevEvolutionNum = newPokemon.prev_evolution[index].num;
+        const prevEvolution = await getByNum(prevEvolutionNum);
+        await addNextEvolution(prevEvolution.id, {
+          num: newPokemon.num,
+          name: newPokemon.name,
+        });
+      }
     }
-  }
 
-  if (newPokemon.next_evolution) {
-    for (let index = 0; index < newPokemon.next_evolution.length; index++) {
-      const nextEvolutionNum = newPokemon.next_evolution[index].num;
-      const nextEvolution = await getByNum(nextEvolutionNum);
-      await addPrevEvolution(nextEvolution.id, {
-        num: newPokemon.num,
-        name: newPokemon.name,
-      });
+    if (newPokemon.next_evolution) {
+      for (let index = 0; index < newPokemon.next_evolution.length; index++) {
+        const nextEvolutionNum = newPokemon.next_evolution[index].num;
+        const nextEvolution = await getByNum(nextEvolutionNum);
+        await addPrevEvolution(nextEvolution.id, {
+          num: newPokemon.num,
+          name: newPokemon.name,
+        });
+      }
     }
+  } catch (error) {
+    throw new Error("Failed to link previous and/or next evolutions");
   }
   return await add(newPokemon);
 };

@@ -1,18 +1,10 @@
 # az
 
-# Starting
-
-1. Ensure Node is installed
-2. Ensure MongoDB is running and can be accessed at `mongodb://localhost:27017`
-3. Run `npm install`
-4. Run `npm run filldb` to fill database with data
-5. Run `npm start` and access at `http://localhost:3000`. Swagger is available at `http://localhost:3000/api-docs`
-
 # Starting (Docker)
 
 1. Ensure Docker is running
 2. `docker-compose up -d`
-3. `npm run filldb`
+3. Access at `http://localhost:3000/api-docs`
 
 # Documentation
 

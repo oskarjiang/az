@@ -10,6 +10,7 @@ import { check, validationResult } from "express-validator";
 import { isElement } from "../domain/Types";
 import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
+import { FillDatabase } from "../db/FillDatabase";
 
 const app = express();
 app.use(express.json());
@@ -219,5 +220,6 @@ app.post("/addPokemon", async (req, res) => {
 });
 
 app.listen(port, () => {
+  FillDatabase();
   return console.log(`Express is listening at http://localhost:${port}`);
 });

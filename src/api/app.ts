@@ -27,18 +27,18 @@ const swaggerOptions = {
         Pokemon: {
           type: "object",
           properties: {
-            id: { type: "number", example: 1 },
-            num: { type: "string", example: "001" },
-            name: { type: "string", example: "Bulbasaur" },
-            img: { type: "string", example: "https://..." },
+            id: { type: "number", example: 152 },
+            num: { type: "string", example: "152" },
+            name: { type: "string", example: "MewOnePointFive" },
+            img: { type: "string", example: "" },
             type: {
               type: "array",
               items: { type: "string" },
-              example: ["Grass", "Poison"],
+              example: ["Psychic"],
             },
             height: { type: "string", example: "0.7m" },
             weight: { type: "string", example: "6.9kg" },
-            candy: { type: "string", example: "Bulbasaur Candy" },
+            candy: { type: "string", example: "MewOnePointFive Candy" },
             candy_count: { type: "number", example: 25 },
             egg: { type: "string", example: "2km" },
             spawn_chance: { type: "number", example: 0.69 },
@@ -48,29 +48,29 @@ const swaggerOptions = {
             weaknesses: {
               type: "array",
               items: { type: "string" },
-              example: ["Fire", "Ice"],
+              example: ["Bug", "Ghost", "Dark"],
             },
             prev_evolution: {
               type: "array",
               items: {
                 type: "object",
                 properties: {
-                  num: { type: "string", example: "001" },
-                  name: { type: "string", example: "Bulbasaur" },
+                  num: { type: "string", example: "151" },
+                  name: { type: "string", example: "Mew" },
                 },
               },
-              example: [{ num: "001", name: "Bulbasaur" }],
+              example: [{ num: "151", name: "Mew" }],
             },
             next_evolution: {
               type: "array",
               items: {
                 type: "object",
                 properties: {
-                  num: { type: "string", example: "003" },
-                  name: { type: "string", example: "Venusaur" },
+                  num: { type: "string", example: "150" },
+                  name: { type: "string", example: "Mewtwo" },
                 },
               },
-              example: [{ num: "003", name: "Venusaur" }],
+              example: [{ num: "150", name: "Mewtwo" }],
             },
           },
         },

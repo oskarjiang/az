@@ -8,10 +8,99 @@ import {
 } from "../application/PokemonService";
 import { check, validationResult } from "express-validator";
 import { isElement } from "../domain/Types";
+import swaggerJsdoc from "swagger-jsdoc";
+import swaggerUi from "swagger-ui-express";
+
 const app = express();
 app.use(express.json());
 const port = 3000;
 
+const swaggerOptions = {
+  swaggerDefinition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Pokemon API",
+      version: "1.0.0",
+    },
+    components: {
+      schemas: {
+        Pokemon: {
+          type: "object",
+          properties: {
+            id: { type: "number", example: 1 },
+            num: { type: "string", example: "001" },
+            name: { type: "string", example: "Bulbasaur" },
+            img: { type: "string", example: "https://..." },
+            type: {
+              type: "array",
+              items: { type: "string" },
+              example: ["Grass", "Poison"],
+            },
+            height: { type: "string", example: "0.7m" },
+            weight: { type: "string", example: "6.9kg" },
+            candy: { type: "string", example: "Bulbasaur Candy" },
+            candy_count: { type: "number", example: 25 },
+            egg: { type: "string", example: "2km" },
+            spawn_chance: { type: "number", example: 0.69 },
+            avg_spawns: { type: "number", example: 69 },
+            spawn_time: { type: "string", example: "20:00" },
+            multipliers: { type: ["number", "null"], example: [1.58] },
+            weaknesses: {
+              type: "array",
+              items: { type: "string" },
+              example: ["Fire", "Ice"],
+            },
+            prev_evolution: {
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  num: { type: "string", example: "001" },
+                  name: { type: "string", example: "Bulbasaur" },
+                },
+              },
+              example: [{ num: "001", name: "Bulbasaur" }],
+            },
+            next_evolution: {
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  num: { type: "string", example: "003" },
+                  name: { type: "string", example: "Venusaur" },
+                },
+              },
+              example: [{ num: "003", name: "Venusaur" }],
+            },
+          },
+        },
+      },
+    },
+  },
+  apis: ["./src/api/app.ts"],
+};
+
+const swaggerSpec = swaggerJsdoc(swaggerOptions);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+/**
+ * @swagger
+ * /getById/{id}:
+ *   get:
+ *     summary: Get Pokemon by ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID of the Pokemon
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *       400:
+ *         description: Invalid ID
+ */
 app.get("/getById/:id", check("id").isNumeric(), async (req, res) => {
   if (!validationResult(req).isEmpty()) {
     return res.status(400).send("Id is not a number");
@@ -19,6 +108,30 @@ app.get("/getById/:id", check("id").isNumeric(), async (req, res) => {
   res.send(await getPokemonById(parseInt(req.params?.id)));
 });
 
+/**
+ * @swagger
+ * /getByType/{type}/{sortOn}:
+ *   get:
+ *     summary: Get Pokemons by type
+ *     parameters:
+ *       - in: path
+ *         name: type
+ *         required: true
+ *         description: Type of the Pokemon
+ *         schema:
+ *           type: string
+ *       - in: path
+ *         name: sortOn
+ *         required: true
+ *         description: Attribute to sort on
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved the Pokemons
+ *       400:
+ *         description: Invalid type provided
+ */
 app.get(
   "/getByType/:type/:sortOn",
   check("type").custom(isElement),
@@ -30,6 +143,24 @@ app.get(
   }
 );
 
+/**
+ * @swagger
+ * /getByName/{name}:
+ *   get:
+ *     summary: Get a Pokemon by name
+ *     parameters:
+ *       - in: path
+ *         name: name
+ *         required: true
+ *         description: Name of the Pokemon
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved the Pokemon
+ *       400:
+ *         description: Name must be at least three characters
+ */
 app.get(
   "/getByName/:name",
   check("name").isLength({ min: 3 }),
@@ -41,16 +172,48 @@ app.get(
   }
 );
 
+/**
+ * @swagger
+ * /getSuggested/{id}:
+ *   get:
+ *     summary: Get suggested Pokemon by ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID of the Pokemon
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved the suggested Pokemon
+ */
 app.get("/getSuggested/:id", async (req, res) => {
   res.send(await getSuggestedPokemonById(parseInt(req.params.id)));
 });
 
+/**
+ * @swagger
+ * /addPokemon:
+ *   post:
+ *     summary: Add a new Pokemon
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Pokemon'
+ *     responses:
+ *       200:
+ *         description: Successfully added the Pokemon
+ *       400:
+ *         description: Bad request
+ */
 app.post("/addPokemon", async (req, res) => {
   try {
     await addPokemon(req.body);
     res.status(200).send("Success");
   } catch (error) {
-    console.log("🚀 ~ app.post ~ error:", error);
     res.status(400).send(error);
   }
 });

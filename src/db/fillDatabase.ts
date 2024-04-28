@@ -6,7 +6,7 @@ const collectionName = "pokemons";
 const url =
   "https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json?_sm_au_=iVV5F7R6VsVpqJM6pGsWvKttvN1NG";
 
-const fillDatabase = async () => {
+const FillDatabase = async () => {
   try {
     console.log("Fetching data...");
     const response = await fetch(url);
@@ -32,4 +32,4 @@ const fillDatabase = async () => {
   }
 };
 
-fillDatabase();
+FillDatabase();

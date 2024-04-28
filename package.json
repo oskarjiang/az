@@ -7,7 +7,7 @@
     "start": "tsc && node dist/api/app.js",
     "dev": "ts-node-dev --respawn --transpile-only src/api/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "filldb": "tsc && node dist/db/fillDatabase.js"
+    "filldb": "tsc && node dist/db/FillDatabase.js"
   },
   "keywords": [],
   "author": "",

@@ -10,7 +10,7 @@
 
 - Architecture is Clean Architecture but with a functional approach
 - I chose to do Fuzzy search using external library since this isn't supported in the free version in MongoDB
-- With more time perhaps domain types would be preferable rather than using the Document type all over the palce
+- With more time perhaps domain types would be preferable rather than using the Document type all over the place
 
 ## Requirements
 

@@ -33,4 +33,4 @@
 - [x] Validate parameters to API endpoints
 - [] Unit tests
 - [] Dockerize application
-- [] Client to consume the API (React, swagger, etc)
+- [x] Client to consume the API (React, swagger, etc)

@@ -1,3 +1,4 @@
+import { uriDocker, dbName, collectionName } from "../constants";
 import { Element } from "../domain/Types";
 import { PokemonDocument } from "./Documents/PokemonDocument";
 import {
@@ -7,17 +8,13 @@ import {
   updatePrevEvolution,
 } from "./MongodbClient";
 
-const uri = "mongodb://localhost:27017";
-const dbName = "az";
-const collectionName = "pokemons";
-
 export const getAll = async () => {
-  return await query(uri, dbName, collectionName);
+  return await query(uriDocker, dbName, collectionName);
 };
 
 export const getById = async (id: number) => {
   return (
-    await query(uri, dbName, collectionName, {
+    await query(uriDocker, dbName, collectionName, {
       id,
     })
   )[0];
@@ -25,7 +22,7 @@ export const getById = async (id: number) => {
 
 export const getByNum = async (num: string) => {
   return (
-    await query(uri, dbName, collectionName, {
+    await query(uriDocker, dbName, collectionName, {
       num,
     })
   )[0];
@@ -33,7 +30,7 @@ export const getByNum = async (num: string) => {
 
 export const getByType = async (type: Element, sortOn?: string) => {
   return await query(
-    uri,
+    uriDocker,
     dbName,
     collectionName,
     {
@@ -47,14 +44,14 @@ export const getByTypeWithoutWeaknesses = async (
   type: Element,
   weaknesses: Element[]
 ) => {
-  return await query(uri, dbName, collectionName, {
+  return await query(uriDocker, dbName, collectionName, {
     type,
     weaknesses: { $nin: weaknesses },
   });
 };
 
 export const add = async (pokemon: PokemonDocument) => {
-  return await insert(uri, dbName, collectionName, pokemon);
+  return await insert(uriDocker, dbName, collectionName, pokemon);
 };
 
 export const addPrevEvolution = async (
@@ -62,7 +59,7 @@ export const addPrevEvolution = async (
   newPrevEvolution: { num: string; name: string }
 ) => {
   await updatePrevEvolution(
-    uri,
+    uriDocker,
     dbName,
     collectionName,
     pokemonId,
@@ -75,7 +72,7 @@ export const addNextEvolution = async (
   newNextEvolution: { num: string; name: string }
 ) => {
   await updateNextEvolution(
-    uri,
+    uriDocker,
     dbName,
     collectionName,
     pokemonId,

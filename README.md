@@ -8,6 +8,12 @@
 4. Run `npm run filldb` to fill database with data
 5. Run `npm start` and access at `http://localhost:3000`. Swagger is available at `http://localhost:3000/api-docs`
 
+# Starting (Docker)
+
+1. Ensure Docker is running
+2. `docker-compose up -d`
+3. `npm run filldb`
+
 # Documentation
 
 - I chose to do Fuzzy search using external library since this isn't supported in the free version in MongoDB

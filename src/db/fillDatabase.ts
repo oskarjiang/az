@@ -1,8 +1,6 @@
 import { MongoClient } from "mongodb";
+import { uriLocal, dbName, collectionName } from "../constants";
 
-const uri = "mongodb://localhost:27017";
-const dbName = "az";
-const collectionName = "pokemons";
 const url =
   "https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json?_sm_au_=iVV5F7R6VsVpqJM6pGsWvKttvN1NG";
 
@@ -13,8 +11,8 @@ const FillDatabase = async () => {
     const jsonData = await response.json();
     console.log("Data fetched successfully");
 
-    console.log(`Connecting to MongoDB at ${uri}...`);
-    const client = new MongoClient(uri);
+    console.log(`Connecting to MongoDB at ${uriLocal}...`);
+    const client = new MongoClient(uriLocal);
     await client.connect();
     console.log(`Connected successfully`);
 

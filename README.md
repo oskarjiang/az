@@ -1,15 +1,15 @@
 # az
 
-# Starting (Docker)
+# Starting
 
 1. Ensure Docker is running
 2. `docker-compose up -d`
 3. Access at `http://localhost:3000/api-docs`
 
-# Documentation
+# Design decisions
 
-- I chose to do Fuzzy search using external library since this isn't supported in the free version in MongoDB
 - Architecture is Clean Architecture but with a functional approach
+- I chose to do Fuzzy search using external library since this isn't supported in the free version in MongoDB
 - With more time perhaps domain types would be preferable rather than using the Document type all over the palce
 
 ## Requirements
@@ -38,5 +38,5 @@
 
 - [x] Validate parameters to API endpoints
 - [x] Unit tests
-- [] Dockerize application
+- [x] Dockerize application
 - [x] Client to consume the API (React, swagger, etc)

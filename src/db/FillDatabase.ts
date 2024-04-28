@@ -18,6 +18,15 @@ export const FillDatabase = async () => {
 
     console.log(`Inserting data into ${dbName} ${collectionName}...`);
     const db = client.db(dbName);
+
+    const collections = await db.listCollections().toArray();
+    const collectionNames = collections.map((col) => col.name);
+    if (collectionNames.includes(collectionName)) {
+      await client.close();
+      console.log(`${collectionName} already exists`);
+      return;
+    }
+
     const collection = db.collection(collectionName);
     await collection.insertMany(jsonData.pokemon);
     console.log("Data inserted into MongoDB successfully");

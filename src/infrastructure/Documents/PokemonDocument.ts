@@ -7,7 +7,7 @@ export type PokemonDocument = {
   height: string;
   weight: string;
   candy: string;
-  candy_count: number;
+  candy_count?: number;
   egg: string;
   spawn_chance: number;
   avg_spawns: number;

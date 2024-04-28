@@ -1,5 +1,13 @@
 # az
 
+# Starting
+
+1. Ensure Node is installed
+2. Ensure MongoDB is running and can be accessed at `mongodb://localhost:27017`
+3. Run `npm install`
+4. Run `npm run filldb` to fill database with data
+5. Run `npm start` and access at `http://localhost:3000`. Swagger is available at `http://localhost:3000/api-docs`
+
 # Documentation
 
 - I chose to do Fuzzy search using external library since this isn't supported in the free version in MongoDB
@@ -31,6 +39,6 @@
 ## Nice to have:
 
 - [x] Validate parameters to API endpoints
-- [] Unit tests
+- [x] Unit tests
 - [] Dockerize application
 - [x] Client to consume the API (React, swagger, etc)
